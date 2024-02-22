@@ -31,39 +31,39 @@ export const mealData =[
         image:'https://www.themealdb.com/images/category/dessert.png'
     },
     {
-        name:'Starter',
+        name:'Starter1',
         image:'https://www.themealdb.com/images/category/starter.png'
     },
     {
-        name:'Beef',
+        name:'Beef1',
         image:'https://www.themealdb.com/images/category/beef.png'
     },
     {
-        name:'Dessert',
+        name:'Dessert1',
         image:'https://www.themealdb.com/images/category/dessert.png'
     },
     {
-        name:'Starter',
+        name:'Starter2',
         image:'https://www.themealdb.com/images/category/starter.png'
     },
     {
-        name:'Beef',
+        name:'Beef2',
         image:'https://www.themealdb.com/images/category/beef.png'
     },
     {
-        name:'Dessert',
+        name:'Dessert2',
         image:'https://www.themealdb.com/images/category/dessert.png'
     },
     {
-        name:'Starter',
+        name:'Starter3',
         image:'https://www.themealdb.com/images/category/starter.png'
     },
     {
-        name:'Beef',
+        name:'Beef3',
         image:'https://www.themealdb.com/images/category/beef.png'
     },
     {
-        name:'Dessert',
+        name:'Dessert3',
         image:'https://www.themealdb.com/images/category/dessert.png'
     },
 ]

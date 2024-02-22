@@ -3,26 +3,58 @@ import React, { useEffect, useState } from 'react'
 import {BellIcon, MagnifyingGlassIcon, NellIcon} from 'react-native-heroicons/outline'
 import { heightPercentageToDP as hp ,widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Categories from '../components/categories'
+import axios from 'axios'
+import Recipes from '../components/recipes'
+
 
 
 const HomeScreen = () => {
   const [activeCat,setActiveCat]= useState('Beef')
   const [categories,setCategories]=useState([])
+  const [recipes,setRecipes]=useState([])
 const getCategories=async()=>{
   try {
-    const res = await fetch ('https://www.themealdb.com/api/json/v1/1/categories.php')
-    const data = await res.json()
-    if (data) {
-      setCategories( data); // Return the categories array
+    const res = await axios.get ('https://www.themealdb.com/api/json/v1/1/categories.php')
+   
+    if (!res) {
+      throw new Error('Failed to fetch categories');
     }
+  
+    if (!res.data ) {
+      throw new Error('Data or categories not found');
+    }
+    setCategories(res.data.categories)
   } catch (error) {
     throw new Error('couldnt fetch data')
   }
 }
+
+const getRecipes=async(category = 'Beef')=>{
+  try {
+
+    const res = await axios.get (`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+    if (!res) {
+      throw new Error('Failed to fetch recipes');
+    }
+  
+    if (!res.data ) {
+      throw new Error(`${category} meals not found`);
+    }
+    setRecipes(res.data.meals)
+  } catch (error) {
+    throw new Error('couldnt fetch data')
+  }
+}
+
+
+
+
+
 useEffect(()=>{
   getCategories()
-  
+  getRecipes()
 },[])
+
 
 
 
@@ -68,9 +100,22 @@ className='flex-1 text-base tracking-wider px-3'
 
 
        {/* categories */}
+    
        <View >
-        <Categories active={activeCat} setActive={setActiveCat} categories={categories}/>
-       </View>
+       {categories.length > 0 ?
+        <Categories active={activeCat} setActive={setActiveCat} Categories={categories}/>
+      :<View>
+        <Text>Loading Categories...</Text>
+        </View> 
+      }
+         </View>
+
+
+         {/* recipes */}
+         <View>
+          <Recipes Categories={categories} Recipes={recipes}/>
+         </View>
+
 
     </ScrollView>
     </View>

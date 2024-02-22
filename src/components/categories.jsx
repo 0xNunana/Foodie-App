@@ -1,14 +1,14 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-
+import { categoryData,mealData } from '../Utils/data'
 import { heightPercentageToDP as hp} from 'react-native-responsive-screen'
 import Animated,{FadeInRight} from 'react-native-reanimated'
 
 
 
 
-const Categories = ( {active,setActive,categories}) => {
-   
+const Categories = ( {active,setActive,Categories}) => {
+    console.log("Fetched",Categories)
 
   return (
     <Animated.View entering={FadeInRight.springify(3000)}>
@@ -19,9 +19,9 @@ const Categories = ( {active,setActive,categories}) => {
      className='space-x-4'
 
      >
-       
+      
         {
-            categories.categories.map((category)=>{
+            Categories?.map((category,index)=>{
                 let isActive = category.strCategory === active;
                 let activebg= isActive ? 'bg-green-400/50':'bg-black/10'
              
@@ -32,7 +32,7 @@ const Categories = ( {active,setActive,categories}) => {
                   < View className={`p-[10px] rounded-full ${activebg}`} >
                   <Image 
   source={{ uri: category.strCategoryThumb }}
-  style={{ height: hp(8), width: hp(8) }}
+  style={{ height: hp(7), width: hp(7) }}
   className='rounded-full'
 
 />
