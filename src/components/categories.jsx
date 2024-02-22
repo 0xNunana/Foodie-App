@@ -1,30 +1,37 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { categoryData,mealData } from '../Utils/data'
-import { heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
-const Categories = ( {active,setActive}) => {
+import { heightPercentageToDP as hp} from 'react-native-responsive-screen'
+import Animated,{FadeInRight} from 'react-native-reanimated'
+
+
+
+
+const Categories = ( {active,setActive,categories}) => {
+   
 
   return (
-    <View>
+    <Animated.View entering={FadeInRight.springify(3000)}>
      <ScrollView
      horizontal
      showsHorizontalScrollIndicator={false}
      contentContainerStyle={{paddingHorizontal:15}}
      className='space-x-4'
+
      >
+       
         {
-            categoryData.map((category,index)=>{
-                let isActive = category.name === active;
+            categories.categories.map((category)=>{
+                let isActive = category.strCategory === active;
                 let activebg= isActive ? 'bg-green-400/50':'bg-black/10'
              
                 return(
-                <TouchableOpacity key={index} 
-                onPress={()=>setActive(category.name)}
+                <TouchableOpacity key={category.idCategory} 
+                onPress={()=>setActive(category.strCategory)}
                 className=' flex items-center'>
-                  <View className={`p-[10px] rounded-full ${activebg}`} >
+                  < View className={`p-[10px] rounded-full ${activebg}`} >
                   <Image 
-  source={{ uri: category.image }}
+  source={{ uri: category.strCategoryThumb }}
   style={{ height: hp(8), width: hp(8) }}
   className='rounded-full'
 
@@ -32,13 +39,13 @@ const Categories = ( {active,setActive}) => {
                   </View>
 
 
-                    <Text className='text-neutral-600' style={{fontSize:hp(1.6)}}>{category.name}</Text>
+                    <Text className='text-neutral-600' style={{fontSize:hp(1.6)}}>{category.strCategory}</Text>
               </TouchableOpacity>)
 })
         }
 
      </ScrollView>
-    </View>
+    </Animated.View>
   )
 }
 

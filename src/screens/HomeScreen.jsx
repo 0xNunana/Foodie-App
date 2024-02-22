@@ -1,12 +1,31 @@
 import { View, Text, StatusBar, ScrollView,Image, TextInput } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {BellIcon, MagnifyingGlassIcon, NellIcon} from 'react-native-heroicons/outline'
 import { heightPercentageToDP as hp ,widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Categories from '../components/categories'
 
-const HomeScreen = () => {
 
+const HomeScreen = () => {
   const [activeCat,setActiveCat]= useState('Beef')
+  const [categories,setCategories]=useState([])
+const getCategories=async()=>{
+  try {
+    const res = await fetch ('https://www.themealdb.com/api/json/v1/1/categories.php')
+    const data = await res.json()
+    if (data) {
+      setCategories( data); // Return the categories array
+    }
+  } catch (error) {
+    throw new Error('couldnt fetch data')
+  }
+}
+useEffect(()=>{
+  getCategories()
+  
+},[])
+
+
+
   return (
     <View className='flex-1 bg-white'>
         <StatusBar style='dark'/>
@@ -49,8 +68,8 @@ className='flex-1 text-base tracking-wider px-3'
 
 
        {/* categories */}
-       <View>
-        <Categories active={activeCat} setActive={setActiveCat}/>
+       <View >
+        <Categories active={activeCat} setActive={setActiveCat} categories={categories}/>
        </View>
 
     </ScrollView>

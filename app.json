@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "chops-hub",
-    "slug": "chops-hub",
+    "name": "foodie",
+    "slug": "foodie",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
