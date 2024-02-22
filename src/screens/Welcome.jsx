@@ -25,7 +25,7 @@ useEffect(()=>{
     setTimeout(() => ring1Padding.value = withSpring(ring1Padding.value + hp(5)), 300);
     setTimeout(()=>turn.value = withSpring(0))
     setTimeout(()=>border.value = withSpring(200),500)
-    //setTimeout(()=>navigation.navigate('Home'),3000)
+    setTimeout(()=>navigation.navigate('Home'),3000)
 },[])
 
   return (

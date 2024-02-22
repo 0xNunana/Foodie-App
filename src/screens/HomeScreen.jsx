@@ -5,6 +5,7 @@ import { heightPercentageToDP as hp ,widthPercentageToDP as wp} from 'react-nati
 import Categories from '../components/categories'
 import axios from 'axios'
 import Recipes from '../components/recipes'
+import Loading from '../components/Loading'
 
 
 
@@ -12,6 +13,16 @@ const HomeScreen = () => {
   const [activeCat,setActiveCat]= useState('Beef')
   const [categories,setCategories]=useState([])
   const [recipes,setRecipes]=useState([])
+
+
+const handleChangeCategory=(category)=>{
+  setRecipes([])
+  getRecipes(category);
+  setActiveCat(category)
+ 
+}
+
+
 const getCategories=async()=>{
   try {
     const res = await axios.get ('https://www.themealdb.com/api/json/v1/1/categories.php')
@@ -71,7 +82,7 @@ useEffect(()=>{
         style={{height:hp(5), width:hp(5), borderRadius:100}}
         />
   <Text style={{fontSize:hp(1.8)}} className='text-neutral-600'>Hello, Xing!</Text>
-        <BellIcon size={hp(4)} color="gray"/>
+        <BellIcon size={hp(4)} color="rgb(20,83,45)"/>
       </View>
 
 {/* Greetings*/ }
@@ -93,7 +104,7 @@ className='flex-1 text-base tracking-wider px-3'
 />
 
 <View className='bg-white rounded-full p-3'>
-  <MagnifyingGlassIcon size={hp(2.7)} strokeWidth={3} color='gray'/>
+  <MagnifyingGlassIcon size={hp(2.7)} strokeWidth={3} color='rgb(20,83,45)'/>
 </View>
 
       </View>
@@ -103,10 +114,8 @@ className='flex-1 text-base tracking-wider px-3'
     
        <View >
        {categories.length > 0 ?
-        <Categories active={activeCat} setActive={setActiveCat} Categories={categories}/>
-      :<View>
-        <Text>Loading Categories...</Text>
-        </View> 
+        <Categories active={activeCat} handleChange={handleChangeCategory} Categories={categories}/>
+      :<Loading size='large' className='my-5' text='Fetching Categories ...'/>
       }
          </View>
 

@@ -4,6 +4,7 @@ import { heightPercentageToDP  as hp} from 'react-native-responsive-screen'
 import MasonryList from '@react-native-seoul/masonry-list';
 import { mealData } from '../Utils/data';
 import RecipeCard from './RecipeCard';
+import Loading from './Loading';
 
 
 
@@ -11,9 +12,11 @@ import RecipeCard from './RecipeCard';
 const Recipes = ({Categories,Recipes}) => {
   return (
     <View className='mx-4 space-y-3'>
-      <Text style={{fontSize:hp(3)}} className='font-semibold text-neutral-600'>Recipe</Text>
+      <Text style={{fontSize:hp(3)}} className='font-semibold text-[rgb(20,83,45)]'>Recipe</Text>
       <View className=''>
-        {Categories.length == 0 ? null : 
+        {Categories.length==0 || Recipes.length == 0 ? (
+            <Loading  size='large' className='mt-20' text='Fetching Recipes ...'/>
+        ) : 
       <MasonryList
   data={Recipes}
   keyExtractor={(item) => item.idMeal}

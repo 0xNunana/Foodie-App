@@ -9,7 +9,7 @@ const Root = createNativeStackNavigator()
 function AppNavigation(){
     return (
         <NavigationContainer >
-            <Root.Navigator initialRouteName="Home" screenOptions={{
+            <Root.Navigator initialRouteName="Welcome" screenOptions={{
                 headerShown:false
             }}>
                 <Root.Screen name="Home" component={HomeScreen}/>
