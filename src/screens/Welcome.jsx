@@ -38,7 +38,7 @@ useEffect(()=>{
 <Animated.View className='bg-white/30  ' style={[animatedStyles,{padding:ring1Padding ,borderRadius:border}]}>
     
         <Animated.Image  source={require('../../assets/images/w.webp')}
-        style={{height:200,width:200}} className='rounded-full'
+        style={{height:hp(25),width:hp(25)}} className='rounded-full'
         />
     
 </Animated.View>
