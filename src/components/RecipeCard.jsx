@@ -7,11 +7,13 @@ import CachedImage from '../Utils/CachedImage'
 
 
 
-const RecipeCard = ({item,index}) => {
+const RecipeCard = ({item,index,navigation}) => {
     let isEven = index%2==0
   return (
     <Animated.View entering={FadeInDown.delay(index*100).duration(1000).springify().damping(12)}>
-  <Pressable style={{width:'100%',paddingLeft:isEven ? 0:8,paddingRight:isEven ? 8:0}}
+  <Pressable
+  onPress={()=>navigation.navigate('Details',{...item})}
+  style={{width:'100%',paddingLeft:isEven ? 0:8,paddingRight:isEven ? 8:0}}
   className="flex justify-center mb-4 space-y-1"
   >
 
@@ -26,6 +28,7 @@ const RecipeCard = ({item,index}) => {
 uri={item.strMealThumb}
 style={{width:'100%', height: index%3==0 ? hp(15) :hp(25),borderRadius:35}}
 className='bg-black/5'
+sharedTransitionTag={item.strMeal}
 />
 
     <Text style={{fontSize:hp(1.5)}} className='font-semibold ml-2 text-neutral-600'>

@@ -5,11 +5,13 @@ import MasonryList from '@react-native-seoul/masonry-list';
 import { mealData } from '../Utils/data';
 import RecipeCard from './RecipeCard';
 import Loading from './Loading';
+import { useNavigation } from '@react-navigation/native';
 
 
 
 
 const Recipes = ({Categories,Recipes}) => {
+  const navigation = useNavigation()
   return (
     <View className='mx-4 space-y-3'>
       <Text style={{fontSize:hp(3)}} className='font-semibold text-[rgb(20,83,45)]'>Recipe</Text>
@@ -22,7 +24,7 @@ const Recipes = ({Categories,Recipes}) => {
   keyExtractor={(item) => item.idMeal}
   numColumns={2}
   showsVerticalScrollIndicator={false}
-  renderItem={({item,i}) => <RecipeCard item={item} index={i}/>}
+  renderItem={({item,i}) => <RecipeCard item={item} index={i} navigation={navigation}/>}
 
  
 />}
